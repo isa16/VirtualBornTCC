@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
-
+import api from '../services/api';
 export default class Feedback extends Component {
     state = {
         feedback: '',
@@ -18,10 +18,18 @@ export default class Feedback extends Component {
     }
 
     handleCriar = async () => {
-        const response = await api.post('professor', {
+        await api.post('/auth/register', {
             feedback: this.state.feedback,
         })
-
+        .then(response => {
+            console.warn(this.state);
+            console.warn(response);
+            this.handleAlert()
+            this.handleNextPage();
+        })
+        .catch(err => {
+            console.warn(err.response)
+        })
     }
 
     render() {
@@ -33,7 +41,7 @@ export default class Feedback extends Component {
                     <Text style={styles.titulo}>Feedback</Text>
                     <TextInput style={styles.input}
                         placeholder="Insira o feedback"
-                        underlineColorAndroid='#F9E0B8'
+                        multiline
                         placeholderTextColor="#363636"
                         autoCorrect={false}
                         autoCapitalize="none"
@@ -44,8 +52,6 @@ export default class Feedback extends Component {
 
                         onPress={() => {
                             this.handleCriar()
-                            this.handleAlert()
-                            this.handleNextPage()
 
                         }}>
                         <Text style={styles.buttonText}>Salvar</Text>

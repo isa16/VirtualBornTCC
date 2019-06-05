@@ -18,14 +18,14 @@ export default class MainProf extends Component {
                         }}>
                         <Text style={styles.buttonText}>Informações</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.botao}
+                    {/* <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
                             this.props.navigation.navigate('Listagem')
 
                         }}>
                         <Text style={styles.buttonText}>Alunos</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     bloco:{
-        marginTop: 80,
+        marginTop: 150,
         alignItems: 'center',
     },
 })
