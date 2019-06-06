@@ -15,6 +15,7 @@ import Recuperar from './pages/recuperar';
 import Relatorio from './pages/relatorio';
 import Prevencao from './pages/prevencao';
 import Teste from './pages/teste';
+import Alarme from './pages/alarme'
 
 export default createStackNavigator({
     Main,
@@ -32,7 +33,8 @@ export default createStackNavigator({
     Recuperar,
     Relatorio,
     Prevencao,
-    Teste
+    Teste,
+    Alarme
 
 }, {
         headerMode: 'none',
