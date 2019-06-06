@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactNativeAN from 'react-native-alarm-notification';
+
 const fireDate = ReactNativeAN.parseDate(new Date(Date.now() + 1000));     // set the fire date for 1 second from now
 
 //const fireDate = '05-06-2019 18:10:00';			  // set exact date time | Format: dd-MM-yyyy HH:mm:ss
@@ -8,7 +9,7 @@ const alarmNotifData = {
     id: "12345",                                  // Required
     title: "Seu bebe precisa de cuidados!!",        // Required
     message: "Entre e cuide dele.",           // Required
-    channel: "my_channel_id",                     // Required. Same id as specified in MainApplication's onCreate method
+    channel: "12345",                     // Required. Same id as specified in MainApplication's onCreate method
     ticker: "My Notification Ticker",
     auto_cancel: true,                            // default: true
     vibrate: true,

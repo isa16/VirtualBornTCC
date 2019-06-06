@@ -62,7 +62,7 @@ const audioTests = [
  {
     title: 'mp3 via require()',
     isRequire: true,
-    url: require('./choro.mp3'),
+  //  url: require('./choro.mp3'),
   },
   
 ];
