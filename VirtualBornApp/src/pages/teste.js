@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  
   scrollContainer: {},
   title: {
     fontSize: 20,
@@ -49,7 +48,7 @@ const Button = ({title, onPress}) => (
 
 const Header = ({children, style}) => <Text style={[styles.header, style]}>{children}</Text>;
 
-const Feature = ({title, onPress, buttonLabel = 'PLAY', status}) => (
+const Feature = ({title, onPress,  buttonLabel = 'PLAY', status}) => (
   <View style={styles.feature}>
     <Header style={{flex: 1}}>{title}</Header>
     {status ? <Text style={{padding: 5}}></Text> : null}
@@ -62,7 +61,7 @@ const audioTests = [
  {
     title: 'mp3 via require()',
     isRequire: true,
-  //  url: require('./choro.mp3'),
+    url: require('./choro.mp3'),
   },
   
 ];
@@ -162,6 +161,13 @@ export default MainView;
 //     };
 //   }
 
+//   componentWilldMount(){
+//     // song = new Sound('choro.mp3', Sound.MAIN_BUNDLE, (error) =>{
+//     //   if(error){
+//     //     ToastAndroid.show('erro');
+//     //   }
+//     // });
+//   }
 
 //   onPressButtonPlay(){
 //     song = new Sound('choro.mp3', Sound.MAIN_BUNDLE, (error) =>{
@@ -175,6 +181,14 @@ export default MainView;
 //               });
 //         }
 //       });
+
+//     // if(song!=null){
+//     //   song.play((sucess) => {
+//     //     if(!sucess){
+//     //       ToastAndroid.show('erro');
+//     //     };
+//     //   });
+//     // }
 //   }
 
 //   render(){
@@ -187,3 +201,4 @@ export default MainView;
       
 //   }
 // }
+

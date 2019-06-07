@@ -32,9 +32,13 @@ export default class Main extends Component {
         return (
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
+
                 <View style={styles.inner}>
                     <ImageBackground source={require('../app/imagens/logo.png')}
                         style={styles.logo}></ImageBackground>
+
+                    <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text>
+                   
                     <View style={styles.bloco}>
                         <TextInput style={styles.input}
                             underlineColorAndroid='#F9E0B8'
@@ -44,6 +48,7 @@ export default class Main extends Component {
                             onChangeText={this.state.email}
                             email={this.state.email}
                             onChangeText={text => this.setState({ email: text })} />
+                       
                         <TextInput style={styles.input}
                             underlineColorAndroid='#F9E0B8'
                             placeholderTextColor="#363636"
@@ -53,21 +58,25 @@ export default class Main extends Component {
                             onChangeText={this.state.password}
                             senha={this.state.password}
                             onChangeText={text => this.setState({ password: text })} />
+                      
                         <TouchableOpacity style={styles.botao}
                             onPress={this.handleLogin}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
+                       
                         <TouchableOpacity onPress={() => {
                             this.props.navigation.navigate('Recuperar')
                         }} >
                             <Text style={styles.buttonText1} > Recuperar Acesso </Text>
                         </TouchableOpacity>
+                       
                         <TouchableOpacity
                             onPress={() => {
                                 this.props.navigation.navigate('Cadastro')
 
                             }}>
                             <Text style={styles.buttonText1}>Cadastre-se</Text>
+                 
                         </TouchableOpacity>
                     </View>
                 </View>

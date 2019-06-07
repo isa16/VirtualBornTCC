@@ -6,8 +6,6 @@ import Rendimento from './pages/rendimento';
 // import ListProfs from './pages/listProfs';
 import Cadastro from './pages/cadastro';
 import Cozinha from './pages/cozinha';
-import Quarto from './pages/quarto';
-import Banheiro from './pages/banheiro';
 import Feedback from './pages/feedback';
 import Informa from './pages/informa';
 // import Listagem from './pages/listagem';
@@ -25,8 +23,6 @@ export default createStackNavigator({
     // ListProfs,
     Rendimento,
     Cozinha,
-    Quarto,
-    Banheiro,
     Feedback,
     Informa,
     // Listagem,
@@ -34,7 +30,7 @@ export default createStackNavigator({
     Relatorio,
     Prevencao,
     Teste,
-    Alarme
+    Alarme,
 
 }, {
         headerMode: 'none',
