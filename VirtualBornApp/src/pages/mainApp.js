@@ -7,7 +7,7 @@ export default class MainApp extends Component {
         return (
             <ImageBackground source={require('../app/imagens/fundo.jpg')} opacity={0.70}
                 style={styles.container}>
-                    <ImageBackground source={require('../app/imagens/logo.png')}
+                    <ImageBackground source={require('../app/imagens/logoMain.png')}
                         style={styles.logo}></ImageBackground>
                 <View style={styles.inner}>
                 <View style={styles.block}>
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },  
     logo: {
-        width: 300,
-        height: 100
+        alignItems: 'center',
+        marginTop: 25
     },
     icons: {
         padding: 0,

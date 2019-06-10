@@ -15,8 +15,8 @@ export default class Recuperar extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')} style={styles.container} >
 
                 <View style={styles.inner} >
-                    <Image source={require('../app/imagens/logo.png')}
-                        style={styles.logo}></Image>
+                <Image source={require('../app/imagens/logoMain.png')}
+                    style={styles.logo}></Image>
 
                     <Text style={styles.titulo}>Recuperação de Acesso</Text>
 
@@ -52,9 +52,8 @@ export default class Recuperar extends Component {
 const styles = StyleSheet.create({
     logo: {
         alignItems: 'center',
-        marginTop: 25,
-        width: 300,
-        height: 120
+        marginTop: 5,
+
     },
     container: {
         flex: 1,

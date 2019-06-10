@@ -31,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNSoundPackage(),
-          new ANPackage(),
+          new ANPackage()
 
       );
     }

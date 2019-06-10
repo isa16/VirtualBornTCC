@@ -12,7 +12,7 @@ export default class Informa extends Component {
                 style={styles.container} >
 
                 <View style={styles.inner} >
-                    <Image source={require('../app/imagens/logo.png')}
+                    <Image source={require('../app/imagens/logoMain.png')}
                         style={styles.logo}></Image>
 
                     <Text style={styles.titulo} >Tipo 1: </Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 25
+        marginTop: 15
     },
     titulo: {
         padding: 0,
@@ -61,21 +61,22 @@ const styles = StyleSheet.create({
     botao: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 270,
+        width: 260,
         height: 45,
-        marginTop: 30,
         margin: 10,
         borderRadius: 50,
         backgroundColor: '#B8860B',
     },
     buttonText: {
+        marginTop: 4,
         color: '#FFF',
         fontSize: 20,
+        opacity: 0.60
     },
     texto: {
         color: '#000',
         fontSize: 15,
-        marginTop: 10,
+        marginTop: 5,
         marginLeft: 5,
         alignItems: 'center',
         padding: 10

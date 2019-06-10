@@ -16,8 +16,8 @@ export default class Relatorio extends Component {
             <View>
                 <ImageBackground source={require('../app/imagens/fundo.jpg')} style={styles.imagemFundo} >
 
-                    <View style={styles.fundo} >
-                        <Image source={require('../app/imagens/logo.png')}
+                    <View style={styles.inner} >
+                        <Image source={require('../app/imagens/logoMain.png')}
                             style={styles.logo}></Image>
 
                         <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebe, 
@@ -39,14 +39,14 @@ export default class Relatorio extends Component {
                                     alert('Relatorio Enviado')
                                     this.props.navigation.navigate('Cozinha')
                                 }}>
-                                <Text>Enviar</Text>
+                                <Text style={styles.buttonText}>Enviar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.botao}
                                 onPress={() => {
                                     this.props.navigation.navigate('Cozinha')
                                 }}>
-                                <Text>Voltar</Text>
+                                <Text style={styles.buttonText}>Voltar</Text>
                         </TouchableOpacity>
 
 
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 25
+        marginTop: 15
     },
     input: {
         width: 280,
@@ -81,26 +81,35 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     botao: {
-        paddingVertical: 10,
-        width: 150,
-        height: 40,
+        justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 90,
-        marginBottom: 10
+        width: 260,
+        height: 45,
+        margin: 10,
+        borderRadius: 50,
+        backgroundColor: '#B8860B',
     },
-    fundo: {
-        backgroundColor: '#87CEEB',
+    inner: {
+        backgroundColor: '#EDC271',
         marginTop: 50,
         borderRadius: 30,
         marginLeft: 10,
         marginRight: 10,
-        height: 550
+        height: 550,
+        alignItems: 'center'
     },
     text: {
         margin: 10,
         marginTop: 20,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        color: '#000'
 
-    }
+    },
+    buttonText: {
+        marginTop: 4,
+        color: '#FFF',
+        fontSize: 20,
+        opacity: 0.60
+    },
 
 })

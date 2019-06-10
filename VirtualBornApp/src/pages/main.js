@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../services/api';
-import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export default class Main extends Component {
 
@@ -34,8 +34,8 @@ export default class Main extends Component {
                 style={styles.container}>
 
                 <View style={styles.inner}>
-                    <ImageBackground source={require('../app/imagens/logo.png')}
-                        style={styles.logo}></ImageBackground>
+                    <Image source={require('../app/imagens/logoMain.png')}
+                        style={styles.logo}></Image>
 
                     <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text>
                    
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 300,
-        height: 120
+        alignItems: 'center',
+        marginTop: 25
     },
     titulo1: {
         padding: 20,

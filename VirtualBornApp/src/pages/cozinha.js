@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, View, Image, Text, TouchableOpacity, Alert
+    StyleSheet, View, Image, Text, TouchableOpacity, Alert, ImageBackground
 } from 'react-native';
 import Sound from 'react-native-sound';
 
@@ -17,6 +17,7 @@ function setTestState(testInfo, component, status) {
 }
 
 //tocar o som
+
 function playSound(testInfo, component) {
     setTestState(testInfo, component, 'pending');
 
@@ -27,12 +28,17 @@ function playSound(testInfo, component) {
             return;
         }
         setTestState(testInfo, component, 'playing');
+        // Run optional pre-play callback
         testInfo.onPrepared && testInfo.onPrepared(sound, component);
         sound.play(() => {
+            // Success counts as getting to the end
             setTestState(testInfo, component, 'win');
+            
+            // Release when it's done so we're not using up resources
             sound.release();
         });
     };
+
 
     if (testInfo.isRequire) {
         const sound = new Sound(testInfo.url, error => callback(error, sound));
@@ -40,7 +46,6 @@ function playSound(testInfo, component) {
         const sound = new Sound(testInfo.url, testInfo.basePath, error => callback(error, sound));
     }
 }
-
 
 
 
@@ -64,12 +69,31 @@ class Cozinha extends Component {
     //         songHolder: 'choro.mp3'
     //     }
     // }
+    constructor(props) {
+        super(props);
+
+        this.stopSoundLooped = () => {
+            if (!this.state.loopingSound) {
+                return;
+            }
+
+            this.state.loopingSound.stop().release();
+            this.setState({ loopingSound: null, tests: { ...this.state.tests, ['mp3 in bundle (looped)']: 'win' } });
+        };
+
+        this.state = {
+            loopingSound: undefined,
+            tests: {},
+        };
+    }
+
+
 
     render() {
         return (
             <View>
-                <View style={styles.fundo} >
 
+                <View style={styles.fundo} >
                     <View style={styles.row} >
 
                         <TouchableOpacity
@@ -82,17 +106,15 @@ class Cozinha extends Component {
                             ></Image>
                         </TouchableOpacity>
 
-                        {audioTests.map(testInfo => {
+                        {audioTests.map(testInfo => { //mapeia o vetor de choros
                             return (
                                 <Text
                                     style={styles.nome}
                                     onPress={() => {
                                         return playSound(testInfo, this);
-                                    }} >Josué</Text>
-
+                                    }}>Josué</Text>
                             );
                         })}
-
 
 
                         <TouchableOpacity onPress={() => {
@@ -127,7 +149,7 @@ class Cozinha extends Component {
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/agua.png')}
-                                //computa erro
+                        
                                 ></Image>
                             </TouchableOpacity>
 
@@ -135,7 +157,7 @@ class Cozinha extends Component {
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/lampada.png')}
-                                //computa erro
+                                   
                                 ></Image>
                             </TouchableOpacity>
 
@@ -161,13 +183,13 @@ export default Cozinha;
 
 const styles = StyleSheet.create({
     fundo: {
-        backgroundColor: '#EEDC82',
+       backgroundColor: '#EEDC82',
         width: '100%',
         height: '100%'
     },
     imagem: {
         width: 210,
-        height: 290,
+        height: 300,
         marginLeft: 75,
         marginTop: 80
     },
@@ -175,19 +197,26 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         marginTop: 8,
+        marginLeft: 40,
+        color: '#000'
+    },
+    stop: {
+        textAlign: 'center',
+        fontSize: 20,
+        marginTop: 25,
         marginLeft: 35
     },
     icon: {
         width: 80,
         height: 100,
-        margin: 5,
+        margin: 4,
         marginTop: 110
     },
     icons: {
-        margin: 5,
+        margin: 3,
         width: 30,
         height: 30,
-        marginLeft: 75
+        marginLeft: 70
     },
     row: {
         flexDirection: 'row'

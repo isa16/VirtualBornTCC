@@ -7,7 +7,7 @@ export default class MainProf extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
-                <ImageBackground source={require('../app/imagens/logo.png')}
+                <ImageBackground source={require('../app/imagens/logoMain.png')}
                         style={styles.logo}></ImageBackground>
                 <View style={styles.bloco}>
                     <TouchableOpacity style={styles.botao}
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 300,
-        height: 120
+        alignItems: 'center',
+        marginTop: 25
     },
     titulo1: {
         padding: 20,
