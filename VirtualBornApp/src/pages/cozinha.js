@@ -14,24 +14,23 @@ const audioTests = [
 
 class Cozinha extends Component {
 
-    //trabalhar em cima disso
-    // constructor() {
-    //     super();
+    //randomSong() {
+    //const random 
+    //random = Math.floor((Math.random() * 3) + 1) //gera numero aleatorio entre 1 e 3 e retorna um numero inteiro (floor)
 
-    //     GenerateRandomSong = () => {
+    //if(random = 0){
+    //faz a aleatoriedade de novo
 
-    //         var RandomSong = sound(Math.random() * otherSounds); //vetor de sons
+    //} else if(random = 1){
+    //sound1.play();
+    //} else if(random = 2){
+    //sound2.play();
+    //} else if(random = 3){
+    //sound3.play();
+    //}
+    //}
 
-    //         this.setState({
-
-    //             NumberHolder: RandomSong
-
-    //         })
-    //     }
-    //     this.state = {
-    //         songHolder: 'choro.mp3'
-    //     }
-    // }
+    //VER QUESTAO DO QUARTO CHORO
 
     constructor(props) {
         super(props);
@@ -148,7 +147,12 @@ class Cozinha extends Component {
                                 ></Image>
                             </TouchableOpacity>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                return this.handleStopSound({
+                                    isRequire: true,
+                                    url: require('./choro.mp3'),
+                                })
+                            }} >
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/agua.png')}
@@ -156,7 +160,12 @@ class Cozinha extends Component {
                                 ></Image>
                             </TouchableOpacity>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                return this.handleStopSound({
+                                    isRequire: true,
+                                    url: require('./choro.mp3'), 
+                                })
+                            }} >
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/lampada.png')}
