@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     Text, TextInput, TouchableOpacity,
-    StyleSheet, View, ImageBackground, Image, Button
+    StyleSheet, View, ImageBackground,
 } from 'react-native';
 import api from '../services/api'
 
@@ -17,8 +17,7 @@ export default class Relatorio extends Component {
                 <ImageBackground source={require('../app/imagens/fundo.jpg')} style={styles.imagemFundo} >
 
                     <View style={styles.inner} >
-                        <Image source={require('../app/imagens/logoMain.png')}
-                            style={styles.logo}></Image>
+                        <Text style={styles.logo}>VirtualBorn</Text>
 
                         <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebe, 
                             as dificuldades encontradas para cuidar e a experiencia adquirida por voce.
@@ -67,7 +66,10 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 15
+        justifyContent: 'center',
+        fontSize: 50,
+        marginTop: 15,
+        color: '#B8860B'
     },
     input: {
         width: 280,

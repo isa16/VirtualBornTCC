@@ -34,8 +34,7 @@ export default class Main extends Component {
                 style={styles.container}>
 
                 <View style={styles.inner}>
-                    <Image source={require('../app/imagens/logoMain.png')}
-                        style={styles.logo}></Image>
+                    <Text style={styles.logo}>VirtualBorn</Text>
 
                     <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text>
                    
@@ -97,7 +96,11 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 25
+        justifyContent: 'center',
+        fontSize: 65,
+        marginTop: 15,
+        padding: 10,
+        color: '#B8860B'
     },
     titulo1: {
         padding: 20,

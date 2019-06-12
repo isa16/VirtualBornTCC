@@ -12,43 +12,6 @@ const audioTests = [
 
 ];
 
-function setTestState(testInfo, component, status) {
-    component.setState({ tests: { ...component.state.tests, [testInfo.title]: status } });
-}
-
-//tocar o som
-
-function playSound(testInfo, component) {
-    setTestState(testInfo, component, 'pending');
-
-    const callback = (error, sound) => {
-        if (error) {
-            Alert.alert('error', error.message);
-            setTestState(testInfo, component, 'fail');
-            return;
-        }
-        setTestState(testInfo, component, 'playing');
-        // Run optional pre-play callback
-        testInfo.onPrepared && testInfo.onPrepared(sound, component);
-        sound.play(() => {
-            // Success counts as getting to the end
-            setTestState(testInfo, component, 'win');
-            
-            // Release when it's done so we're not using up resources
-            sound.release();
-        });
-    };
-
-
-    if (testInfo.isRequire) {
-        const sound = new Sound(testInfo.url, error => callback(error, sound));
-    } else {
-        const sound = new Sound(testInfo.url, testInfo.basePath, error => callback(error, sound));
-    }
-}
-
-
-
 class Cozinha extends Component {
 
     //trabalhar em cima disso
@@ -69,22 +32,56 @@ class Cozinha extends Component {
     //         songHolder: 'choro.mp3'
     //     }
     // }
+
     constructor(props) {
         super(props);
 
-        this.stopSoundLooped = () => {
-            if (!this.state.loopingSound) {
-                return;
-            }
-
-            this.state.loopingSound.stop().release();
-            this.setState({ loopingSound: null, tests: { ...this.state.tests, ['mp3 in bundle (looped)']: 'win' } });
-        };
+        Sound.setCategory("Playback", true);
 
         this.state = {
-            loopingSound: undefined,
             tests: {},
         };
+    }
+
+    setTestState = (testInfo, status) => {
+        this.setState({ tests: { ...this.state.tests, [testInfo.title]: status } });
+    }
+
+    //tocar o som
+
+    playSound = (testInfo) => {
+        this.setTestState(testInfo, 'pending');
+
+        const callback = (error) => {
+            if (error) {
+                Alert.alert('error', error.message);
+                this.setTestState(testInfo, 'fail');
+                return;
+            }
+            this.setTestState(testInfo, 'playing');
+            // Run optional pre-play callback
+            testInfo.onPrepared && testInfo.onPrepared(this.sound);
+            this.sound.play(() => {
+                // Success counts as getting to the end
+                this.setTestState(testInfo, 'win');
+
+                // Release when it's done so we're not using up resources
+                this.sound.release();
+            });
+        };
+
+
+        if (testInfo.isRequire) {
+            this.sound = new Sound(testInfo.url, error => callback(error));
+        } else {
+            this.sound = new Sound(testInfo.url, testInfo.basePath, error => callback(error));
+        }
+    }
+
+    handleStopSound = (testInfo) => {
+
+        this.sound.stop();
+
     }
 
 
@@ -106,15 +103,18 @@ class Cozinha extends Component {
                             ></Image>
                         </TouchableOpacity>
 
-                        {audioTests.map(testInfo => { //mapeia o vetor de choros
-                            return (
-                                <Text
-                                    style={styles.nome}
-                                    onPress={() => {
-                                        return playSound(testInfo, this);
-                                    }}>Josué</Text>
-                            );
-                        })}
+                        {/* {audioTests.map(testInfo => { //mapeia o vetor de choros
+                            return ( */}
+                        <Text
+                            style={styles.nome}
+                            onPress={() => {
+                                return this.playSound({
+                                    isRequire: true,
+                                    url: require('./choro.mp3'),
+                                });
+                            }}>Josué</Text>
+                        {/* ); */}
+                        {/* })} */}
 
 
                         <TouchableOpacity onPress={() => {
@@ -135,13 +135,16 @@ class Cozinha extends Component {
 
                         <View style={styles.row} >
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                return this.handleStopSound({
+                                    isRequire: true,
+                                    url: require('./choro.mp3'),
+                                })
+                            }}>
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/mamadeira.png')}
-                                    onPress={() => {
-                                        this.sound.stop();
-                                    }}
+
                                 ></Image>
                             </TouchableOpacity>
 
@@ -149,7 +152,7 @@ class Cozinha extends Component {
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/agua.png')}
-                        
+
                                 ></Image>
                             </TouchableOpacity>
 
@@ -157,7 +160,7 @@ class Cozinha extends Component {
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/lampada.png')}
-                                   
+
                                 ></Image>
                             </TouchableOpacity>
 
@@ -183,7 +186,7 @@ export default Cozinha;
 
 const styles = StyleSheet.create({
     fundo: {
-       backgroundColor: '#EEDC82',
+        backgroundColor: '#EEDC82',
         width: '100%',
         height: '100%'
     },
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
         width: 210,
         height: 300,
         marginLeft: 75,
-        marginTop: 80
+        marginTop: 100
     },
     nome: {
         textAlign: 'center',
@@ -207,9 +210,9 @@ const styles = StyleSheet.create({
         marginLeft: 35
     },
     icon: {
-        width: 80,
-        height: 100,
-        margin: 4,
+        width: 50,
+        height: 62,
+        margin: 20,
         marginTop: 110
     },
     icons: {
@@ -219,7 +222,8 @@ const styles = StyleSheet.create({
         marginLeft: 70
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 20
     },
     container: {
         flex: 1,

@@ -12,8 +12,7 @@ export default class Informa extends Component {
                 style={styles.container} >
 
                 <View style={styles.inner} >
-                    <Image source={require('../app/imagens/logoMain.png')}
-                        style={styles.logo}></Image>
+                    <Text style={styles.logo}>VirtualBorn</Text>
 
                     <Text style={styles.titulo} >Tipo 1: </Text>
                     <Text style={styles.texto} >Quando o bebê chora emitindo o som "nhê", é o reflexo que o bebê faz para sugar.</Text>
@@ -49,7 +48,10 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 15
+        justifyContent: 'center',
+        fontSize: 50,
+        marginTop: 15,
+        color: '#B8860B'
     },
     titulo: {
         padding: 0,
