@@ -1,36 +1,10 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, View, Image, Text, TouchableOpacity, Alert, ImageBackground
+    StyleSheet, View, Image, Text, TouchableOpacity, Alert
 } from 'react-native';
 import Sound from 'react-native-sound';
 
-const audioTests = [
-    {
-        isRequire: true,
-        url: require('./choro.mp3'),
-    },
-
-];
-
 class Cozinha extends Component {
-
-    //randomSong() {
-    //const random 
-    //random = Math.floor((Math.random() * 3) + 1) //gera numero aleatorio entre 1 e 3 e retorna um numero inteiro (floor)
-
-    //if(random = 0){
-    //faz a aleatoriedade de novo
-
-    //} else if(random = 1){
-    //sound1.play();
-    //} else if(random = 2){
-    //sound2.play();
-    //} else if(random = 3){
-    //sound3.play();
-    //}
-    //}
-
-    //VER QUESTAO DO QUARTO CHORO
 
     constructor(props) {
         super(props);
@@ -46,9 +20,8 @@ class Cozinha extends Component {
         this.setState({ tests: { ...this.state.tests, [testInfo.title]: status } });
     }
 
-    //tocar o som
-
-    playSound = (testInfo) => {
+    //tocar o primeiro choro
+    playSound1 = (testInfo) => {
         this.setTestState(testInfo, 'pending');
 
         const callback = (error) => {
@@ -58,32 +31,117 @@ class Cozinha extends Component {
                 return;
             }
             this.setTestState(testInfo, 'playing');
-            // Run optional pre-play callback
+
             testInfo.onPrepared && testInfo.onPrepared(this.sound);
             this.sound.play(() => {
-                // Success counts as getting to the end
+           
                 this.setTestState(testInfo, 'win');
 
-                // Release when it's done so we're not using up resources
                 this.sound.release();
             });
         };
-
 
         if (testInfo.isRequire) {
             this.sound = new Sound(testInfo.url, error => callback(error));
         } else {
             this.sound = new Sound(testInfo.url, testInfo.basePath, error => callback(error));
         }
+
     }
 
-    handleStopSound = (testInfo) => {
+    //tocar segundo choro
+    playSound2 = (testInfo) => {
+        this.setTestState(testInfo, 'pending');
 
+        const callback = (error) => {
+            if (error) {
+                Alert.alert('error', error.message);
+                this.setTestState(testInfo, 'fail');
+                return;
+            }
+            this.setTestState(testInfo, 'playing');
+
+            testInfo.onPrepared && testInfo.onPrepared(this.sound);
+            this.sound.play(() => {
+
+                this.setTestState(testInfo, 'win');
+
+                this.sound.release();
+            });
+        };
+
+        if (testInfo.isRequire) {
+            this.sound = new Sound(testInfo.url2, error => callback(error));
+        } else {
+            this.sound = new Sound(testInfo.url2, testInfo.basePath, error => callback(error));
+        }
+
+    }
+
+    //tocar terceiro choro
+    playSound3 = (testInfo) => {
+        this.setTestState(testInfo, 'pending');
+
+        const callback = (error) => {
+            if (error) {
+                Alert.alert('error', error.message);
+                this.setTestState(testInfo, 'fail');
+                return;
+            }
+            this.setTestState(testInfo, 'playing');
+
+            testInfo.onPrepared && testInfo.onPrepared(this.sound);
+
+            this.sound.play(() => {
+                this.setTestState(testInfo, 'win');
+
+                this.sound.release();
+            });
+        };
+
+        if (testInfo.isRequire) {
+            this.sound = new Sound(testInfo.url3, error => callback(error));
+        } else {
+            this.sound = new Sound(testInfo.url3, testInfo.basePath, error => callback(error));
+        }
+
+    }
+
+    //parar qualquer choro
+    handleStopSound = () => {
+      
         this.sound.stop();
-
     }
 
+    //função randomica para gerar choros aleatorios
+    randomSound = () => {
+        const random = Math.floor((Math.random() * 3) + 1)
 
+        if (random == 0) {
+            random++
+        } else if (random == 1) {
+            this.playSound1({
+                isRequire: true,
+                url: require('./choro.mp3'),
+            });
+        } else
+            if (random == 2) {
+                this.playSound2({
+                    isRequire: true,
+                    url2: require('./choro2.mp3'),
+                });
+            } else
+                if (random == 3) {
+                    this.playSound3({
+                        isRequire: true,
+                        url3: require('./choro3.mp3'),
+                    });
+                } else {
+                    console.log(error)
+                }
+
+        console.warn(random)
+    }
 
     render() {
         return (
@@ -102,18 +160,11 @@ class Cozinha extends Component {
                             ></Image>
                         </TouchableOpacity>
 
-                        {/* {audioTests.map(testInfo => { //mapeia o vetor de choros
-                            return ( */}
                         <Text
                             style={styles.nome}
                             onPress={() => {
-                                return this.playSound({
-                                    isRequire: true,
-                                    url: require('./choro.mp3'),
-                                });
+                                return this.randomSound();
                             }}>Josué</Text>
-                        {/* ); */}
-                        {/* })} */}
 
 
                         <TouchableOpacity onPress={() => {
@@ -135,23 +186,16 @@ class Cozinha extends Component {
                         <View style={styles.row} >
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound({
-                                    isRequire: true,
-                                    url: require('./choro.mp3'),
-                                })
+                                return this.handleStopSound() 
                             }}>
                                 <Image
                                     style={styles.icon}
                                     source={require('../app/imagens/mamadeira.png')}
-
                                 ></Image>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound({
-                                    isRequire: true,
-                                    url: require('./choro.mp3'),
-                                })
+                                return this.handleStopSound()
                             }} >
                                 <Image
                                     style={styles.icon}
@@ -161,10 +205,7 @@ class Cozinha extends Component {
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound({
-                                    isRequire: true,
-                                    url: require('./choro.mp3'), 
-                                })
+                                return this.handleStopSound()
                             }} >
                                 <Image
                                     style={styles.icon}
