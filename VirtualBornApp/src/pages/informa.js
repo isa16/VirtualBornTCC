@@ -21,10 +21,7 @@ export default class Informa extends Component {
                     <Text style={styles.texto} >Quando o bebê chora emitindo o som "aa", é reflexo que o bebê tem para bocejo.</Text>
 
                     <Text style={styles.titulo} >Tipo 3: </Text>
-                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "heh", é o reflexo de desconforto</Text>
-
-                    <Text style={styles.titulo} >Tipo 4: </Text>
-                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "éar", é para emitir dor.</Text>
+                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "heh", é o reflexo de desconforto.</Text>
 
 
                     <TouchableOpacity style={styles.botao}
