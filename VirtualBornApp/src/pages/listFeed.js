@@ -3,30 +3,39 @@ import api from '../services/api';
 
 import { View, Text, ImageBackground, StyleSheet, Picker, Alert, TouchableOpacity, FlatList } from 'react-native';
 
-export default class ListProfs extends Component {
+export default class ListFeed extends Component {
 
 
     state = {
-        docs: [],
-        turma: ''
+        nome: '',
+        feedback: ''
     }
 
-    componentDidMount() {
-        this.loadProfessores();
-    }
-
-    loadProfessores = async () => {
-        const response = await api.get('/auth/listar');
-        this.setState({ docs: response.data });
-
+    handleNextPage() {
+        this.props.navigation.navigate('Relatorio')
     }
 
 
+    handleFeedback = async () => {
+        const response = await api.get('/auth/mostrarFeedback', {
+            nome: this.state.nome
+        })
+            .then(response => {
+                console.warn(this.state);
+                console.warn(response);
+                this.handleAlert()
+                this.handleNextPage();
+            })
+            .catch(err => {
+                console.warn(err.response)
+            })
 
+        this.setState({feedback: response})
+    }
     renderItem = ({ item }) => (
         <View style={styles.profContainer}>
             <Text style={styles.profTitle}>{item.nome}</Text>
-            <Text style={styles.profEmail}>E-mail: {item.email}</Text>
+            <Text style={styles.profEmail}>Relatório: {item.email}</Text>
             <Text style={styles.profSenha}>Turma: {item.turma}</Text>
 
             {/* <TouchableOpacity style={styles.button} onPress={() => {
@@ -73,22 +82,26 @@ export default class ListProfs extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
-                    <Picker
-                        selectedValue={this.state.turma}
-                        style={styles.select}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({ turma: itemValue })
-                        }>
-                        <Picker.Item label="Turma:" value=" " />
-                        <Picker.Item label="8º ano" value="8º ano" />
-                        <Picker.Item label="9º ano" value="9º ano" />
-                    </Picker>
+                    <TextInput style={styles.input}
+                        underlineColorAndroid='transparent'
+                        placeholder='Nome completo do Professor'
+                        onChangeText={(nome) => this.setState({ nome })}
+                        value={this.state.nome} >
 
-                    <FlatList
-                        contentContainerStyle={styles.list}
-                        data={this.state.docs}
-                        keyExtractor={item => item._id}
-                        renderItem={this.renderItem} />
+                    </TextInput>
+                    <TouchableOpacity
+                            onPress={() => {
+                               this.handleFeedback()
+
+                            }}>
+                            <Text style={styles.buttonText1}>Buscar</Text>
+                 
+                        </TouchableOpacity>
+
+                    <Text>
+                        {this.state.feedback}
+                    </Text>
+                    
 
                 </View>
             </ImageBackground>

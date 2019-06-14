@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class MainProf extends Component {
     render() {
@@ -7,25 +7,16 @@ export default class MainProf extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
-                <ImageBackground source={require('../app/imagens/logoMain.png')}
-                        style={styles.logo}></ImageBackground>
+                <Text style={styles.logo}>VIRTUALBORN</Text>
                 <View style={styles.bloco}>
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
-                            this.props.navigation.navigate('Rendimento')
+                            this.props.navigation.navigate('ListRela')
 
                         }}>
                         <Text style={styles.buttonText}>Informações</Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity style={styles.botao}
-
-                        onPress={() => {
-                            this.props.navigation.navigate('Listagem')
-
-                        }}>
-                        <Text style={styles.buttonText}>Alunos</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {

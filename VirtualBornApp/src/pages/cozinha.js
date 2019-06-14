@@ -32,9 +32,10 @@ class Cozinha extends Component {
             }
             this.setTestState(testInfo, 'playing');
 
+
             testInfo.onPrepared && testInfo.onPrepared(this.sound);
             this.sound.play(() => {
-           
+
                 this.setTestState(testInfo, 'win');
 
                 this.sound.release();
@@ -109,8 +110,12 @@ class Cozinha extends Component {
 
     //parar qualquer choro
     handleStopSound = () => {
-      
+
         this.sound.stop();
+    }
+
+    GetSoundFile = () => {
+        return this.sound._filename.split("?")[0].split("/").slice(-1)[0];
     }
 
     //função randomica para gerar choros aleatorios
@@ -186,7 +191,10 @@ class Cozinha extends Component {
                         <View style={styles.row} >
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound() 
+                                if (this.GetSoundFile() == "choro.mp3") {
+
+                                    return this.handleStopSound()
+                                }
                             }}>
                                 <Image
                                     style={styles.icon}
@@ -195,7 +203,10 @@ class Cozinha extends Component {
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound()
+                                if (this.GetSoundFile() == "choro2.mp3") {
+
+                                    return this.handleStopSound()
+                                }
                             }} >
                                 <Image
                                     style={styles.icon}
@@ -205,7 +216,10 @@ class Cozinha extends Component {
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => {
-                                return this.handleStopSound()
+                                if (this.GetSoundFile() == "choro3.mp3") {
+
+                                    return this.handleStopSound()
+                                }
                             }} >
                                 <Image
                                     style={styles.icon}

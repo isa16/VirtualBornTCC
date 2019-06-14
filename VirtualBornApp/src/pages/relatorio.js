@@ -10,7 +10,32 @@ export default class Relatorio extends Component {
     state = {
         relatorio: "",
     }
-    
+
+    handleNextPage() {
+        this.props.navigation.navigate('Relatorio')
+    }
+
+    handleAlert() {
+        Alert.alert(
+            'Pronto',
+            'Relatório enviado com sucesso',
+        )
+    }
+
+    handleRelatorio = async () => {
+        await api.post('/auth/relatorio', {
+            relatorio: this.state.relatorio
+        })
+            .then(response => {
+                console.warn(this.state);
+                console.warn(response);
+                this.handleAlert()
+                this.handleNextPage();
+            })
+            .catch(err => {
+                console.warn(err.response)
+            })
+    }
     render() {
         return (
             <View>
@@ -19,7 +44,7 @@ export default class Relatorio extends Component {
                     <View style={styles.inner} >
                         <Text style={styles.logo}>VirtualBorn</Text>
 
-                        <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebe, 
+                        <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebe,
                             as dificuldades encontradas para cuidar e a experiencia adquirida por voce.
                         </Text>
 
@@ -30,24 +55,25 @@ export default class Relatorio extends Component {
                             value={this.state.relatorio} ></TextInput>
 
                         <TouchableOpacity style={styles.botao}
-                                onPress={() => {
-                                    api.post('/aluno', {
-                                        relatorio: this.state.relatorio,
-                                    
-                                    })
-                                    alert('Relatorio Enviado')
-                                    this.props.navigation.navigate('Cozinha')
-                                }}>
-                                <Text style={styles.buttonText}>Enviar</Text>
+                            onPress={() => {
+                                this.handleRelatorio();
+                            }}>
+                            <Text style={styles.buttonText}>Enviar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.botao}
-                                onPress={() => {
-                                    this.props.navigation.navigate('Cozinha')
-                                }}>
-                                <Text style={styles.buttonText}>Voltar</Text>
+                            onPress={() => {
+                                this.props.navigation.navigate('Cozinha')
+                            }}>
+                            <Text style={styles.buttonText}>Voltar</Text>
                         </TouchableOpacity>
 
+                        <TouchableOpacity style={styles.botao}
+                            onPress={() => {
+                                this.props.navigation.navigate('ListFeed')
+                            }}>
+                            <Text style={styles.buttonText}>Ver Feedback</Text>
+                        </TouchableOpacity>
 
 
 

@@ -1,0 +1,36 @@
+
+            {/* <TouchableOpacity style={styles.button} onPress={() => {
+                Alert.alert(
+                    'Deletar',
+                    `Deseja realmente deletar ${item.nome} da sua lista de professores?`,
+                    [
+                        {
+                            text: 'Não', onPress: () =>
+                                console.log('Cancel Pressed'),
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Sim', onPress: () => {
+                                api.delete(`/professor/${item._id}`)
+                                    .then(res => {
+                                        this.loadProfessores();
+                                        Alert.alert(
+                                            'Pronto',
+                                            'Intem deletado com sucesso'
+                                        )
+                                    })
+                                    .catch(err => {
+                                        Alert.alert(
+                                            'Erro',
+                                            'Não foi possível efetuar a exclusão'
+                                        )
+                                    })
+                            }
+                        }
+                    ],
+                    { cancelable: false }
+                )
+
+            }}>
+                <Text style={styles.buttonText}>Deletar</Text>
+            </TouchableOpacity> */}

@@ -51,105 +51,36 @@ export default class Cadastro extends Component {
             corCabeloM: this.state.corCabeloM,
             corCabeloP: this.state.corCabeloP,
         })
-        .then(response => {
-            console.warn(this.state);
-            console.warn(response);
-            this.handleAlert()
-            this.handleNextPage();
-        })
-        .catch(err => {
-            console.warn(err.response)
-        })
+            .then(response => {
+                console.warn(this.state);
+                console.warn(response);
+                this.handleAlert()
+                this.handleNextPage();
+            })
+            .catch(err => {
+                console.warn(err.response)
+            })
     }
 
-    
+
     renderTipo() {
         if (this.state.tipoU == "Aluno")
-        return (
-
-            <ScrollView>
-                
-                <Text style={styles.titulo}>Cadastro do Aluno</Text>
-                <Picker
-                    selectedValue={this.state.tipoU}
-                    style={styles.select}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({ tipoU: itemValue })
-                    }>
-                    <Picker.Item label="Professor" value=" " />
-                    <Picker.Item label="Professor" value="Professor" />
-                    <Picker.Item label="Aluno" value="Aluno" />
-                </Picker>
-
-                <TextInput style={styles.input}
-                    placeholder="Nome Completo"
-                    underlineColorAndroid='#F9E0B8'
-                    placeholderTextColor="#363636"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    value={this.state.nome}
-                    onChangeText={text => this.setState({ nome: text })} />
-                <TextInput style={styles.input}
-                    underlineColorAndroid='#F9E0B8'
-                    placeholderTextColor="#363636"
-                    placeholder="E-mail"
-                    value={this.state.email}
-                    onChangeText={text => this.setState({ email: text })} />
-                <TextInput secureTextEntry={true}
-                    style={styles.input}
-                    underlineColorAndroid='#F9E0B8'
-                    placeholderTextColor="#363636"
-                    placeholder="Senha"
-                    autoCapitalize="none"
-                    value={this.state.password}
-                    onChangeText={text => this.setState({ password: text })} />
-                <TextInput 
-                    style={styles.input}
-                    underlineColorAndroid='#F9E0B8'
-                    placeholderTextColor="#363636"
-                    placeholder="Sexo"
-                    autoCapitalize="none"
-                    value={this.state.sexo}
-                    onChangeText={text => this.setState({ sexo: text })} />
-
-                <Picker
-                    selectedValue={this.state.turma}
-                    style={styles.select}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({ turma: itemValue })
-                    }>
-                    <Picker.Item label="Turma:" value="" />
-                    <Picker.Item label="8º ano" value="8º ano" />
-                    <Picker.Item label="9º ano" value="9º ano" />
-                </Picker>
-                {this.renderBebe()}
-                <TouchableOpacity style={styles.botao}
-
-                    onPress={() => {
-                        this.handleCadastrar()
-                        this.handleAlert()
-                        this.handleNextPage()
-
-                    }}>
-                    <Text style={styles.buttonText}>Cadastrar</Text>
-
-                </TouchableOpacity>
-
-            </ScrollView>
-        )
             return (
+
                 <ScrollView>
-                    <Text style={styles.titulo}>Cadastro do Professor</Text>
+
+                    <Text style={styles.titulo}>Cadastro do Aluno</Text>
                     <Picker
                         selectedValue={this.state.tipoU}
                         style={styles.select}
                         onValueChange={(itemValue, itemIndex) =>
                             this.setState({ tipoU: itemValue })
                         }>
-                        <Picker.Item label="Selecione:" value=" " />
+                        <Picker.Item label="Professor" value=" " />
                         <Picker.Item label="Professor" value="Professor" />
                         <Picker.Item label="Aluno" value="Aluno" />
                     </Picker>
+
                     <TextInput style={styles.input}
                         placeholder="Nome Completo"
                         underlineColorAndroid='#F9E0B8'
@@ -176,25 +107,94 @@ export default class Cadastro extends Component {
                         style={styles.input}
                         underlineColorAndroid='#F9E0B8'
                         placeholderTextColor="#363636"
-                        placeholder="Turma"
+                        placeholder="Sexo"
                         autoCapitalize="none"
-                        value={this.state.turmaP}
-                        onChangeText={text => this.setState({ turmaP: text })} />
+                        value={this.state.sexo}
+                        onChangeText={text => this.setState({ sexo: text })} />
 
+                    <Picker
+                        selectedValue={this.state.turma}
+                        style={styles.select}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ turma: itemValue })
+                        }>
+                        <Picker.Item label="Turma:" value="" />
+                        <Picker.Item label="8º ano" value="8º ano" />
+                        <Picker.Item label="9º ano" value="9º ano" />
+                    </Picker>
+                    {this.renderBebe()}
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
-                            this.handleCriar()
-                            
+                            this.handleCadastrar()
+                            this.handleAlert()
+                            this.handleNextPage()
 
                         }}>
                         <Text style={styles.buttonText}>Cadastrar</Text>
 
                     </TouchableOpacity>
-                </ScrollView>
 
+                </ScrollView>
             )
-       
+        return (
+            <ScrollView>
+                <Text style={styles.titulo}>Cadastro do Professor</Text>
+                <Picker
+                    selectedValue={this.state.tipoU}
+                    style={styles.select}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({ tipoU: itemValue })
+                    }>
+                    <Picker.Item label="Selecione:" value=" " />
+                    <Picker.Item label="Professor" value="Professor" />
+                    <Picker.Item label="Aluno" value="Aluno" />
+                </Picker>
+                <TextInput style={styles.input}
+                    placeholder="Nome Completo"
+                    underlineColorAndroid='#F9E0B8'
+                    placeholderTextColor="#363636"
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    value={this.state.nome}
+                    onChangeText={text => this.setState({ nome: text })} />
+                <TextInput style={styles.input}
+                    underlineColorAndroid='#F9E0B8'
+                    placeholderTextColor="#363636"
+                    placeholder="E-mail"
+                    value={this.state.email}
+                    onChangeText={text => this.setState({ email: text })} />
+                <TextInput secureTextEntry={true}
+                    style={styles.input}
+                    underlineColorAndroid='#F9E0B8'
+                    placeholderTextColor="#363636"
+                    placeholder="Senha"
+                    autoCapitalize="none"
+                    value={this.state.password}
+                    onChangeText={text => this.setState({ password: text })} />
+                <TextInput
+                    style={styles.input}
+                    underlineColorAndroid='#F9E0B8'
+                    placeholderTextColor="#363636"
+                    placeholder="Turma"
+                    autoCapitalize="none"
+                    value={this.state.turmaP}
+                    onChangeText={text => this.setState({ turmaP: text })} />
+
+                <TouchableOpacity style={styles.botao}
+
+                    onPress={() => {
+                        this.handleCriar()
+
+
+                    }}>
+                    <Text style={styles.buttonText}>Cadastrar</Text>
+
+                </TouchableOpacity>
+            </ScrollView>
+
+        )
+
 
     }
 
@@ -269,7 +269,7 @@ export default class Cadastro extends Component {
 
                 <View style={styles.inner}>
                     <ScrollView>
-                    <Text style={styles.titulo1}>VirtualBorn</Text>
+                        <Text style={styles.titulo1}>VirtualBorn</Text>
                         {this.renderTipo(this.state.tipoU)}
                     </ScrollView>
                 </View>

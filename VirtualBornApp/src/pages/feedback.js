@@ -3,33 +3,33 @@ import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, TextInput, A
 import api from '../services/api';
 export default class Feedback extends Component {
     state = {
-        feedback: '',
+        feedback: "",
     }
 
     handleNextPage() {
-        this.props.navigation.navigate('MainApp')
+        this.props.navigation.navigate('Relatorio')
     }
 
     handleAlert() {
         Alert.alert(
             'Pronto',
-            'Feedback salvo com sucesso',
+            'Feedback enviado com sucesso',
         )
     }
 
-    handleCriar = async () => {
-        await api.post('/auth/register', {
-            feedback: this.state.feedback,
+    handleFeedback = async () => {
+        await api.post('/auth/feedback', {
+            feedback: this.state.feedback
         })
-        .then(response => {
-            console.warn(this.state);
-            console.warn(response);
-            this.handleAlert()
-            this.handleNextPage();
-        })
-        .catch(err => {
-            console.warn(err.response)
-        })
+            .then(response => {
+                console.warn(this.state);
+                console.warn(response);
+                this.handleAlert()
+                this.handleNextPage();
+            })
+            .catch(err => {
+                console.warn(err.response)
+            })
     }
 
     render() {
@@ -51,7 +51,7 @@ export default class Feedback extends Component {
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
-                            this.handleCriar()
+                            this.handleFeedback()
 
                         }}>
                         <Text style={styles.buttonText}>Salvar</Text>

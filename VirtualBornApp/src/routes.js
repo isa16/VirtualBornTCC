@@ -3,12 +3,12 @@ import Main from './pages/main';
 import MainApp from './pages/mainApp';
 import MainProf from './pages/mainProf';
 import Rendimento from './pages/rendimento';
-// import ListProfs from './pages/listProfs';
+import ListFeed from './pages/listFeed';
 import Cadastro from './pages/cadastro';
 import Cozinha from './pages/cozinha';
 import Feedback from './pages/feedback';
 import Informa from './pages/informa';
-// import Listagem from './pages/listagem';
+import ListRela from './pages/listRela';
 import Recuperar from './pages/recuperar';
 import Relatorio from './pages/relatorio';
 import Prevencao from './pages/prevencao';
@@ -20,12 +20,12 @@ export default createStackNavigator({
     Cadastro,
     MainApp,    
     MainProf,
-    // ListProfs,
+    ListFeed,
     Rendimento,
     Cozinha,
     Feedback,
     Informa,
-    // Listagem,
+    ListRela,
     Recuperar,
     Relatorio,
     Prevencao,
