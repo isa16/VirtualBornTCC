@@ -30,12 +30,12 @@ export default class ListRela extends Component {
 
         this.setState({ relatorios: response.relatorio })
     }
+
     renderItem = ({ item }) => (
-        <View style={styles.profContainer}>
+        <View style={styles.Container}>
             <Text style={styles.profEmail}>Relatório: {item.parecer}</Text>
         </View>
     )
-
 
     render() {
         return (
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'transparent',
     },
-    profContainer: {
+    Container: {
         backgroundColor: 'transparent',
         borderWidth: 1,
         borderRadius: 30,

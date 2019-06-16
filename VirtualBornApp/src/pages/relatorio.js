@@ -36,6 +36,7 @@ export default class Relatorio extends Component {
                 console.warn(err.response)
             })
     }
+
     render() {
         return (
             <View>
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         marginLeft: 10,
         marginRight: 10,
-        height: 550,
+        height: 600,
         alignItems: 'center'
     },
     text: {

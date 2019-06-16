@@ -36,7 +36,7 @@ export default class Main extends Component {
                 <View style={styles.inner}>
                     <Text style={styles.logo}>VirtualBorn</Text>
 
-                    <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text>
+                    {/* <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text> */}
                    
                     <View style={styles.bloco}>
                         <TextInput style={styles.input}

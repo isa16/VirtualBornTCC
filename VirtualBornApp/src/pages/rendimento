@@ -11,7 +11,6 @@ export default class Acertos extends Component {
                         underlineColorAndroid='#F9E0B8'
                         placeholderTextColor="#363636"
                         placeholder="Nome Completo do Aluno"
-
                         autoCapitalize="none" />
                     <TouchableOpacity style={styles.botao}
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../services/api';
 
-import { View, Text, ImageBackground, StyleSheet, Picker, Alert, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ListFeed extends Component {
 
@@ -23,59 +23,15 @@ export default class ListFeed extends Component {
             .then(response => {
                 console.warn(this.state);
                 console.warn(response);
-                this.handleAlert()
                 this.handleNextPage();
             })
             .catch(err => {
                 console.warn(err.response)
             })
 
-        this.setState({feedback: response})
+        this.setState({ feedback: response })
     }
-    renderItem = ({ item }) => (
-        <View style={styles.profContainer}>
-            <Text style={styles.profTitle}>{item.nome}</Text>
-            <Text style={styles.profEmail}>Relatório: {item.email}</Text>
-            <Text style={styles.profSenha}>Turma: {item.turma}</Text>
-
-            {/* <TouchableOpacity style={styles.button} onPress={() => {
-                Alert.alert(
-                    'Deletar',
-                    `Deseja realmente deletar ${item.nome} da sua lista de professores?`,
-                    [
-                        {
-                            text: 'Não', onPress: () =>
-                                console.log('Cancel Pressed'),
-                            style: 'cancel',
-                        },
-                        {
-                            text: 'Sim', onPress: () => {
-                                api.delete(`/professor/${item._id}`)
-                                    .then(res => {
-                                        this.loadProfessores();
-                                        Alert.alert(
-                                            'Pronto',
-                                            'Intem deletado com sucesso'
-                                        )
-                                    })
-                                    .catch(err => {
-                                        Alert.alert(
-                                            'Erro',
-                                            'Não foi possível efetuar a exclusão'
-                                        )
-                                    })
-                            }
-                        }
-                    ],
-                    { cancelable: false }
-                )
-
-            }}>
-                <Text style={styles.buttonText}>Deletar</Text>
-            </TouchableOpacity> */}
-        </View>
-    )
-
+   
 
     render() {
         return (
@@ -90,18 +46,18 @@ export default class ListFeed extends Component {
 
                     </TextInput>
                     <TouchableOpacity
-                            onPress={() => {
-                               this.handleFeedback()
+                        onPress={() => {
+                            this.handleFeedback()
 
-                            }}>
-                            <Text style={styles.buttonText1}>Buscar</Text>
-                 
-                        </TouchableOpacity>
+                        }}>
+                        <Text style={styles.buttonText1}>Buscar</Text>
+
+                    </TouchableOpacity>
 
                     <Text>
                         {this.state.feedback}
                     </Text>
-                    
+
 
                 </View>
             </ImageBackground>
@@ -127,7 +83,7 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'transparent',
     },
-    profContainer: {
+    Container: {
         backgroundColor: 'transparent',
         borderWidth: 1,
         borderRadius: 30,

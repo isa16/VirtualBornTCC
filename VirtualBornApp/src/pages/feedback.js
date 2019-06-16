@@ -45,16 +45,16 @@ export default class Feedback extends Component {
                         placeholderTextColor="#363636"
                         autoCorrect={false}
                         autoCapitalize="none"
-                        value={this.state.nome}
-                        onChangeText={text => this.setState({ nome: text })} />
-                    
+                        value={this.state.feedback}
+                        onChangeText={text => this.setState({ feedback: text })} />
+
                     <TouchableOpacity style={styles.botao}
 
                         onPress={() => {
                             this.handleFeedback()
 
                         }}>
-                        <Text style={styles.buttonText}>Salvar</Text>
+                        <Text style={styles.buttonText}>Enviar</Text>
 
                     </TouchableOpacity>
                 </View>
