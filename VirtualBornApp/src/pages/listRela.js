@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../services/api';
-
-import { View, Text, ImageBackground, StyleSheet, Alert, TouchableOpacity, FlatList } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TextInput, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 
 export default class ListRela extends Component {
 
@@ -12,28 +12,30 @@ export default class ListRela extends Component {
     }
 
     handleNextPage() {
-        this.props.navigation.navigate('Relatorio')
+        this.props.navigation.navigate('ListRela')
     }
 
     handleRelatorio = async () => {
-        const response = await api.get('/auth/mostrarRelatorio', {
-            nome: this.state.nome
+        const token = await AsyncStorage.getItem('token')
+        fetch("http://172.23.149.134:3001/auth/mostrarRelatorio", {
+            method: "POST",
+            body:
+                JSON.stringify({
+                    nome: this.state.nome
+                }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
-            .then(response => {
-                console.warn(this.state);
-                console.warn(response);
-                this.handleNextPage();
-            })
-            .catch(err => {
-                console.warn(err.response)
-            })
-
-        this.setState({ relatorios: response.relatorio })
+            .then(response => response.json())
+            .then(data => { this.setState({ relatorios: data }) })
+            .catch(err => { console.warn(err) })
     }
 
     renderItem = ({ item }) => (
         <View style={styles.Container}>
-            <Text style={styles.profEmail}>Relatório: {item.parecer}</Text>
+            <Text style={styles.parecer}>Relatório: {item.parecer}</Text>
         </View>
     )
 
@@ -42,6 +44,7 @@ export default class ListRela extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
+                    <Text style={styles.titulo1}>VirtualBorn</Text>
                     <TextInput style={styles.input}
                         underlineColorAndroid='transparent'
                         placeholder='Nome completo do Aluno'
@@ -49,12 +52,20 @@ export default class ListRela extends Component {
                         value={this.state.nome} >
 
                     </TextInput>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => {
+                            this.handleRelatorio()
 
-                    <FlatList
-                        contentContainerStyle={styles.list}
-                        data={this.state.relatorios}
-                        keyExtractor={item => item._id}
-                        renderItem={this.renderItem} />
+                        }}>
+                        <Text style={styles.buttonText1}>Buscar</Text>
+                    </TouchableOpacity>
+                    <ScrollView>
+                        <FlatList
+                            contentContainerStyle={styles.list}
+                            data={this.state.relatorios}
+                            keyExtractor={item => item._id}
+                            renderItem={this.renderItem} />
+                    </ScrollView>
 
                 </View>
             </ImageBackground>
@@ -63,6 +74,17 @@ export default class ListRela extends Component {
 }
 
 const styles = StyleSheet.create({
+    input: {
+        width: 270,
+        height: 55,
+        marginTop: 20,
+        margin: 5,
+        padding: 20,
+        backgroundColor: '#F9E0B8',
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -79,44 +101,49 @@ const styles = StyleSheet.create({
     list: {
         padding: 20,
         backgroundColor: 'transparent',
+        
     },
     Container: {
         backgroundColor: 'transparent',
         borderWidth: 1,
+        width: 270,
+        height: 200,
         borderRadius: 30,
-        borderColor: 'rgb(100,149,237)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#B8860B',
         padding: 20,
         marginBottom: 20,
     },
-    profTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333'
-    },
-    profEmail: {
-        fontSize: 13,
-        color: "#999",
+    parecer: {
+        fontSize: 15,
+        color: "#FFF",
         marginTop: 15,
-        lineHeight: 24,
-    },
-    profSenha: {
-        fontSize: 12,
-        color: "#999",
-        marginTop: 5,
         lineHeight: 24,
     },
     button: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 170,
-        height: 42,
-        marginTop: 10,
+        width: 270,
+        height: 45,
+        marginTop: 30,
+        margin: 10,
         borderRadius: 50,
-        backgroundColor: '#2089DA',
+        backgroundColor: '#B8860B',
+    },
+    titulo1: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 45,
+        marginTop: 15,
+        padding: 10,
+        color: '#B8860B'
     },
     buttonText: {
-        fontSize: 16,
         color: '#FFF',
+        fontSize: 20,
         fontWeight: 'bold',
     },
 })

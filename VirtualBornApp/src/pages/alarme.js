@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactNativeAN from 'react-native-alarm-notification';
 
-const fireDate = ReactNativeAN.parseDate(new Date(Date.now() + 1000));    
+const fireDate = ReactNativeAN.parseDate(new Date(Date.now() + 1000));
 
 //const fireDate = '06-06-2019 19:51:00';			  
 
@@ -24,9 +24,13 @@ const alarmNotifData = {
   	data: { foo: "bar" },
 };
 
+
 ReactNativeAN.scheduleAlarm(alarmNotifData);
- 
+
 export default class App extends Component {
+    componentDidMount() {
+        // ReactNativeAN.scheduleAlarm(alarmNotifData);
+    }
  
     method(){
         //Schedule Future Alarm

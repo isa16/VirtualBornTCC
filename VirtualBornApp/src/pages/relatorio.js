@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
     Text, TextInput, TouchableOpacity,
-    StyleSheet, View, ImageBackground,
+    StyleSheet, View, ImageBackground, Alert
 } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import api from '../services/api'
 
 
 export default class Relatorio extends Component {
     state = {
-        relatorio: "",
+        parecer: "",
     }
 
     handleNextPage() {
@@ -23,18 +24,24 @@ export default class Relatorio extends Component {
     }
 
     handleRelatorio = async () => {
-        await api.post('/auth/relatorio', {
-            relatorio: this.state.relatorio
+        const token = await AsyncStorage.getItem('token')
+
+        fetch("http://172.23.149.134:3001/auth/relatorio", {
+            method: "POST",
+            body:
+                JSON.stringify({
+                    parecer: this.state.parecer
+                }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
-            .then(response => {
-                console.warn(this.state);
-                console.warn(response);
-                this.handleAlert()
-                this.handleNextPage();
-            })
-            .catch(err => {
-                console.warn(err.response)
-            })
+            .then(response => response.json())
+            .then(data => { console.log(data) })
+            .catch(err => { console.log(err) })
+        this.handleAlert()
+        this.handleNextPage();
     }
 
     render() {
@@ -52,21 +59,14 @@ export default class Relatorio extends Component {
                         <TextInput style={styles.input}
                             underlineColorAndroid='transparent'
                             placeholder='Relatorio diário'
-                            onChangeText={(relatorio) => this.setState({ relatorio })}
-                            value={this.state.relatorio} ></TextInput>
+                            onChangeText={(parecer) => this.setState({ parecer })}
+                            value={this.state.parecer} ></TextInput>
 
                         <TouchableOpacity style={styles.botao}
                             onPress={() => {
                                 this.handleRelatorio();
                             }}>
                             <Text style={styles.buttonText}>Enviar</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.botao}
-                            onPress={() => {
-                                this.props.navigation.navigate('Cozinha')
-                            }}>
-                            <Text style={styles.buttonText}>Voltar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.botao}

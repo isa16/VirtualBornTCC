@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import api from '../services/api';
-import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 export default class Main extends Component {
 
@@ -10,24 +11,36 @@ export default class Main extends Component {
     }
 
     handleNextPage() {
-        this.props.navigation.navigate('MainApp')
+        this.props.navigation.navigate('MainProf')
+    }
+
+    handleNextPageAluno() {
+        this.props.navigation.navigate('Cozinha')
     }
 
     handleLogin = async () => {
-        await api.post('/auth/authenticate', {
-            email: this.state.email,
-            password: this.state.password,
-        })
-        .then(response => {
-            console.warn(this.state);
-            console.warn(response);
-            this.handleNextPage();
-        })
-        .catch(err => {
-            console.warn(err.response)
-        })
-    }
+        const { email, password } = this.state;
 
+        if (email === '' || password === '')
+            return alert("Há campos obrigatórios em branco")
+        try {
+            const response = await api.post('/auth/authenticate', {
+                email: this.state.email,
+                password: this.state.password,
+            })
+            await AsyncStorage.setItem('token', `${response.data.token}`)
+            if (response.data.user.tipoU === 'Professor') {
+
+                this.handleNextPage();
+            } else {
+                this.handleNextPageAluno();
+            }
+
+        } catch (err) {
+            return Alert.alert('Erro',
+                'Verifique seu usuário e senha')
+        }
+    }
     render() {
         return (
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
@@ -35,9 +48,6 @@ export default class Main extends Component {
 
                 <View style={styles.inner}>
                     <Text style={styles.logo}>VirtualBorn</Text>
-
-                    {/* <Text onPress={() => {this.props.navigation.navigate('Cozinha')}}>aa</Text> */}
-                   
                     <View style={styles.bloco}>
                         <TextInput style={styles.input}
                             underlineColorAndroid='#F9E0B8'
@@ -47,7 +57,7 @@ export default class Main extends Component {
                             onChangeText={this.state.email}
                             email={this.state.email}
                             onChangeText={text => this.setState({ email: text })} />
-                       
+
                         <TextInput style={styles.input}
                             underlineColorAndroid='#F9E0B8'
                             placeholderTextColor="#363636"
@@ -57,25 +67,25 @@ export default class Main extends Component {
                             onChangeText={this.state.password}
                             senha={this.state.password}
                             onChangeText={text => this.setState({ password: text })} />
-                      
+
                         <TouchableOpacity style={styles.botao}
                             onPress={this.handleLogin}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
-                       
+
                         <TouchableOpacity onPress={() => {
                             this.props.navigation.navigate('Recuperar')
                         }} >
                             <Text style={styles.buttonText1} > Recuperar Acesso </Text>
                         </TouchableOpacity>
-                       
+
                         <TouchableOpacity
                             onPress={() => {
                                 this.props.navigation.navigate('Cadastro')
 
                             }}>
                             <Text style={styles.buttonText1}>Cadastre-se</Text>
-                 
+
                         </TouchableOpacity>
                     </View>
                 </View>

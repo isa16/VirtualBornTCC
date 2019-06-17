@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../services/api';
-
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
 export default class ListFeed extends Component {
 
@@ -12,26 +12,29 @@ export default class ListFeed extends Component {
     }
 
     handleNextPage() {
-        this.props.navigation.navigate('Relatorio')
+        this.props.navigation.navigate('ListFeed')
     }
 
 
     handleFeedback = async () => {
-        const response = await api.get('/auth/mostrarFeedback', {
-            nome: this.state.nome
+        const token = await AsyncStorage.getItem('token')
+        fetch("http://172.23.149.134:3001/auth/mostrarFeedback", {
+            method: "POST",
+            body:
+                JSON.stringify({
+                    nome: this.state.nome
+                }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
-            .then(response => {
-                console.warn(this.state);
-                console.warn(response);
-                this.handleNextPage();
-            })
-            .catch(err => {
-                console.warn(err.response)
-            })
+            .then(response => response.json())
+            .then(data => {console.log(data) })
+            .catch(err => { console.warn(err) })
 
-        this.setState({ feedback: response })
     }
-   
+
 
     render() {
         return (
@@ -45,7 +48,7 @@ export default class ListFeed extends Component {
                         value={this.state.nome} >
 
                     </TextInput>
-                    <TouchableOpacity
+                    <TouchableOpacity style={styles.button}
                         onPress={() => {
                             this.handleFeedback()
 
@@ -66,6 +69,17 @@ export default class ListFeed extends Component {
 }
 
 const styles = StyleSheet.create({
+    input: {
+        width: 270,
+        height: 55,
+        marginTop: 20,
+        margin: 5,
+        padding: 20,
+        backgroundColor: '#F9E0B8',
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -95,31 +109,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(100,149,237)',
         color: "#333"
     },
-    profTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333'
-    },
-    profEmail: {
-        fontSize: 13,
-        color: "#999",
-        marginTop: 15,
-        lineHeight: 24,
-    },
-    profSenha: {
-        fontSize: 12,
-        color: "#999",
-        marginTop: 5,
-        lineHeight: 24,
-    },
     button: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 170,
-        height: 42,
-        marginTop: 10,
+        width: 270,
+        height: 45,
+        marginTop: 30,
+        margin: 10,
         borderRadius: 50,
-        backgroundColor: '#2089DA',
+        backgroundColor: '#B8860B',
     },
     buttonText: {
         fontSize: 16,

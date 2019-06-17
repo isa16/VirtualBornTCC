@@ -34,3 +34,43 @@
             }}>
                 <Text style={styles.buttonText}>Deletar</Text>
             </TouchableOpacity> */}
+
+
+            handleCriar = async () => {
+    try {
+        await AsyncStorage.setItem('token', `${token}`)
+    
+    } catch (err) {
+        console.log(err)
+    }
+    
+    const token = await AsyncStorage.getItem('token')
+
+    fetch("http://192.168.0.101:3001/auth/register", {
+        method: "POST",
+        body:
+            JSON.stringify({
+                nome: this.state.nome,
+                email: this.state.email,
+                password: this.state.password,
+                tipoU: this.state.tipoU,
+                turmaP: this.state.turmaP,
+                sexo: this.state.sexo,
+                turma: this.state.turma,
+                nomeB: this.state.nomeB,
+                etniaM: this.state.etniaM,
+                etniaP: this.state.etniaP,
+                corOlhoM: this.state.corOlhoM,
+                corOlhoP: this.state.corOlhoP,
+                corCabeloM: this.state.corCabeloM,
+                corCabeloP: this.state.corCabeloP,
+            }),
+        headers: {
+            // "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    })
+        .then(response => response.json())
+        .then(data => { console.warn(data) })
+        .catch(err => { console.warn(err) })
+}

@@ -7,7 +7,7 @@ export default class MainProf extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
-                <Text style={styles.logo}>VIRTUALBORN</Text>
+                <Text style={styles.logo}>VirtualBorn</Text>
                 <View style={styles.bloco}>
                     <TouchableOpacity style={styles.botao}
 
@@ -40,7 +40,11 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignItems: 'center',
-        marginTop: 25
+        justifyContent: 'center',
+        fontSize: 65,
+        marginTop: 15,
+        padding: 10,
+        color: '#B8860B'
     },
     titulo1: {
         padding: 20,
@@ -75,5 +79,7 @@ const styles = StyleSheet.create({
     bloco:{
         marginTop: 150,
         alignItems: 'center',
+        justifyContent: 'center',
+        margin: 20
     },
 })

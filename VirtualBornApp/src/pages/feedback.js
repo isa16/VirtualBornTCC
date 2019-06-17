@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
 import api from '../services/api';
 export default class Feedback extends Component {
@@ -7,7 +8,7 @@ export default class Feedback extends Component {
     }
 
     handleNextPage() {
-        this.props.navigation.navigate('Relatorio')
+        this.props.navigation.navigate('Feedback')
     }
 
     handleAlert() {
@@ -18,18 +19,26 @@ export default class Feedback extends Component {
     }
 
     handleFeedback = async () => {
-        await api.post('/auth/feedback', {
-            feedback: this.state.feedback
+        const token = await AsyncStorage.getItem('token')
+
+        fetch("http://172.23.149.134:3001/auth/feedback", {
+            method: "POST",
+            body:
+                JSON.stringify({
+                    feedback: this.state.feedback
+                }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
-            .then(response => {
-                console.warn(this.state);
-                console.warn(response);
-                this.handleAlert()
-                this.handleNextPage();
-            })
-            .catch(err => {
-                console.warn(err.response)
-            })
+            .then(response => response.json())
+            .then(data => { console.log(data) })
+            .catch(err => { console.log(err) })
+        this.handleAlert()
+        this.handleNextPage();
+
+
     }
 
     render() {
