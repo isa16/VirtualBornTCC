@@ -17,7 +17,7 @@ export default class ListRela extends Component {
 
     handleRelatorio = async () => {
         const token = await AsyncStorage.getItem('token')
-        fetch("http://172.23.149.134:3001/auth/mostrarRelatorio", {
+        fetch("http://192.168.1.6:3001/auth/mostrarRelatorio", {
             method: "POST",
             body:
                 JSON.stringify({
@@ -45,6 +45,7 @@ export default class ListRela extends Component {
                 style={styles.container}>
                 <View style={styles.inner}>
                     <Text style={styles.titulo1}>VirtualBorn</Text>
+
                     <TextInput style={styles.input}
                         underlineColorAndroid='transparent'
                         placeholder='Nome completo do Aluno'
@@ -57,7 +58,7 @@ export default class ListRela extends Component {
                             this.handleRelatorio()
 
                         }}>
-                        <Text style={styles.buttonText1}>Buscar</Text>
+                        <Text style={styles.buttonText}>Buscar</Text>
                     </TouchableOpacity>
                     <ScrollView>
                         <FlatList
@@ -107,19 +108,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: 1,
         width: 270,
-        height: 200,
+        height: 250,
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
         borderColor: '#B8860B',
-        padding: 20,
+        padding: 10,
         marginBottom: 20,
     },
     parecer: {
         fontSize: 15,
-        color: "#FFF",
+        color: "#000",
         marginTop: 15,
         lineHeight: 24,
     },
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#FFF',
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 20,  
+        fontWeight: 'bold',  
     },
 })

@@ -25,8 +25,7 @@ export default class Relatorio extends Component {
 
     handleRelatorio = async () => {
         const token = await AsyncStorage.getItem('token')
-
-        fetch("http://172.23.149.134:3001/auth/relatorio", {
+        fetch("http://192.168.1.6:3001/auth/relatorio", {
             method: "POST",
             body:
                 JSON.stringify({
@@ -51,33 +50,31 @@ export default class Relatorio extends Component {
 
                     <View style={styles.inner} >
                         <Text style={styles.logo}>VirtualBorn</Text>
-
-                        <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebe,
-                            as dificuldades encontradas para cuidar e a experiencia adquirida por voce.
+                        <View style={styles.bloco}>
+                            <Text style={styles.text} >Preencha aqui seu relatório diário sobre os cuidados com o seu bebê,
+                                as dificuldades encontradas para cuidar e a experiência adquirida por você.
                         </Text>
 
-                        <TextInput style={styles.input}
-                            underlineColorAndroid='transparent'
-                            placeholder='Relatorio diário'
-                            onChangeText={(parecer) => this.setState({ parecer })}
-                            value={this.state.parecer} ></TextInput>
+                            <TextInput style={styles.input}
+                                underlineColorAndroid='transparent'
+                                placeholder='Relatorio diário'
+                                onChangeText={(parecer) => this.setState({ parecer })}
+                                value={this.state.parecer} ></TextInput>
 
-                        <TouchableOpacity style={styles.botao}
-                            onPress={() => {
-                                this.handleRelatorio();
-                            }}>
-                            <Text style={styles.buttonText}>Enviar</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity style={styles.botao}
+                                onPress={() => {
+                                    this.handleRelatorio();
+                                }}>
+                                <Text style={styles.buttonText}>Enviar</Text>
+                            </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.botao}
-                            onPress={() => {
-                                this.props.navigation.navigate('ListFeed')
-                            }}>
-                            <Text style={styles.buttonText}>Ver Feedback</Text>
-                        </TouchableOpacity>
-
-
-
+                            <TouchableOpacity style={styles.botao}
+                                onPress={() => {
+                                    this.props.navigation.navigate('ListFeed')
+                                }}>
+                                <Text style={styles.buttonText}>Ver Feedback</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </ImageBackground>
             </View>
@@ -98,16 +95,22 @@ const styles = StyleSheet.create({
         marginTop: 15,
         color: '#B8860B'
     },
+    bloco: {
+        marginTop: 20,
+        alignItems: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     input: {
         width: 280,
         height: 200,
         borderColor: 'gray',
-        borderWidth: 0,
         borderRadius: 30,
-        backgroundColor: '#F0F8FF',
+        backgroundColor: '#F9E0B8',
         marginTop: 30,
         margin: 30,
-        marginBottom: 10
+        marginBottom: 10,
+        padding: 5
     },
     botao: {
         justifyContent: 'center',
@@ -130,15 +133,15 @@ const styles = StyleSheet.create({
     text: {
         margin: 10,
         marginTop: 20,
-        alignItems: 'flex-end',
+        fontSize: 16,
+        alignItems: 'baseline',
         color: '#000'
 
     },
     buttonText: {
-        marginTop: 4,
         color: '#FFF',
         fontSize: 20,
-        opacity: 0.60
+        fontWeight: 'bold',
     },
 
 })

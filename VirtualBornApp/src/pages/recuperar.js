@@ -15,33 +15,32 @@ export default class Recuperar extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')} style={styles.container} >
 
                 <View style={styles.inner} >
-                <Image source={require('../app/imagens/logoMain.png')}
-                    style={styles.logo}></Image>
+                    <Text style={styles.logo}>VirtualBorn</Text>
+                    <View style={styles.bloco}>
+                        <Text style={styles.titulo}>Recuperação de Acesso</Text>
 
-                    <Text style={styles.titulo}>Recuperação de Acesso</Text>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid='#F9E0B8'
+                            placeholderTextColor="#363636"
+                            placeholder="E-mail"
+                            value={this.state.email}
+                            onChangeText={text => this.setState({ email: text })} />
+                        <TextInput secureTextEntry={true}
+                            style={styles.input}
+                            underlineColorAndroid='#F9E0B8'
+                            placeholderTextColor="#363636"
+                            placeholder="Senha"
+                            autoCapitalize="none"
+                            value={this.state.senha}
+                            onChangeText={text => this.setState({ senha: text })} />
+                        <TouchableOpacity style={styles.botao}
+                            onPress={() => {
+                                //alteraçao bd
+                            }}>
+                            <Text style={styles.buttonText}>Recuperar</Text>
+                        </TouchableOpacity>
 
-                    <TextInput style={styles.input}
-                        underlineColorAndroid='#F9E0B8'
-                        placeholderTextColor="#363636"
-                        placeholder="E-mail"
-                        value={this.state.email}
-                        onChangeText={text => this.setState({ email: text })} />
-                    <TextInput secureTextEntry={true}
-                        style={styles.input}
-                        underlineColorAndroid='#F9E0B8'
-                        placeholderTextColor="#363636"
-                        placeholder="Senha"
-                        autoCapitalize="none"
-                        value={this.state.senha}
-                        onChangeText={text => this.setState({ senha: text })} />
-                    <TouchableOpacity style={styles.botao}
-                        onPress={() => {
-                            //alteraçao bd
-                        }}>
-                        <Text style={styles.buttonText}>Recuperar</Text>
-                    </TouchableOpacity>
-
-
+                    </View>
                 </View>
             </ImageBackground>
         )
@@ -52,8 +51,11 @@ export default class Recuperar extends Component {
 const styles = StyleSheet.create({
     logo: {
         alignItems: 'center',
-        marginTop: 5,
-
+        justifyContent: 'center',
+        fontSize: 65,
+        marginTop: 15,
+        padding: 10,
+        color: '#B8860B'
     },
     container: {
         flex: 1,
@@ -71,15 +73,17 @@ const styles = StyleSheet.create({
         color: '#FFF',
         margin: 10,
     },
-
+    bloco: {
+        marginTop: 50,
+        alignItems: 'center',
+    },
     inner: {
         height: 600,
         width: 350,
         backgroundColor: '#EDC271',
         borderRadius: 15,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-
     },
     botao: {
         justifyContent: 'center',
@@ -93,7 +97,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#FFF',
-        fontSize: 20,
+        fontSize: 20,  
+        fontWeight: 'bold',
     },
     input: {
         width: 270,

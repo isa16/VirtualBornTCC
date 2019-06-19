@@ -104,6 +104,14 @@ const styles = StyleSheet.create({
         marginTop: 50,
         alignItems: 'center',
     },
+    inner: {
+        height: 600,
+        width: 350,
+        backgroundColor: '#EDC271',
+        borderRadius: 15,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
     logo: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -119,14 +127,6 @@ const styles = StyleSheet.create({
         margin: 10,
         marginTop: 20
     },
-    inner: {
-        height: 600,
-        width: 350,
-        backgroundColor: '#EDC271',
-        borderRadius: 15,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
     botao: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -139,13 +139,15 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#FFF',
-        fontSize: 20,
+        fontSize: 20,  
+        fontWeight: 'bold',     
     },
     buttonText1: {
         marginTop: 20,
         color: '#000',
         fontSize: 15,
-        opacity: 0.60
+        opacity: 0.60,
+        fontWeight: 'bold',
     },
     input: {
         width: 270,
@@ -158,4 +160,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
 })

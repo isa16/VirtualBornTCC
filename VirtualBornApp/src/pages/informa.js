@@ -13,23 +13,24 @@ export default class Informa extends Component {
 
                 <View style={styles.inner} >
                     <Text style={styles.logo}>VirtualBorn</Text>
+                    <View style={styles.bloco} >
+                        <Text style={styles.titulo} >Tipo 1: </Text>
+                        <Text style={styles.texto} >Quando o bebê chora emitindo o som "nhê", é o reflexo que o bebê faz para sugar.</Text>
 
-                    <Text style={styles.titulo} >Tipo 1: </Text>
-                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "nhê", é o reflexo que o bebê faz para sugar.</Text>
+                        <Text style={styles.titulo} >Tipo 2: </Text>
+                        <Text style={styles.texto} >Quando o bebê chora emitindo o som "aa", é reflexo que o bebê tem para bocejo.</Text>
 
-                    <Text style={styles.titulo} >Tipo 2: </Text>
-                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "aa", é reflexo que o bebê tem para bocejo.</Text>
-
-                    <Text style={styles.titulo} >Tipo 3: </Text>
-                    <Text style={styles.texto} >Quando o bebê chora emitindo o som "heh", é o reflexo de desconforto.</Text>
+                        <Text style={styles.titulo} >Tipo 3: </Text>
+                        <Text style={styles.texto} >Quando o bebê chora emitindo o som "heh", é o reflexo de desconforto.</Text>
 
 
-                    <TouchableOpacity style={styles.botao}
-                        onPress={() => {
-                            this.props.navigation.navigate('Cozinha')
-                        }}>
-                        <Text style={styles.buttonText}>Voltar</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.botao}
+                            onPress={() => {
+                                this.props.navigation.navigate('Cozinha')
+                            }}>
+                            <Text style={styles.buttonText}>Voltar</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ImageBackground>
         )
@@ -50,6 +51,10 @@ const styles = StyleSheet.create({
         marginTop: 15,
         color: '#B8860B'
     },
+    bloco: {
+        marginTop: 50,
+        alignItems: 'center',
+    },
     titulo: {
         padding: 0,
         margin: 10,
@@ -63,14 +68,14 @@ const styles = StyleSheet.create({
         width: 260,
         height: 45,
         margin: 10,
+        marginTop: 10,
         borderRadius: 50,
         backgroundColor: '#B8860B',
     },
     buttonText: {
-        marginTop: 4,
         color: '#FFF',
         fontSize: 20,
-        opacity: 0.60
+        fontWeight: 'bold',
     },
     texto: {
         color: '#000',

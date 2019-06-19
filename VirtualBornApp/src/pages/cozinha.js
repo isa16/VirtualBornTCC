@@ -14,7 +14,13 @@ class Cozinha extends Component {
         this.state = {
             tests: {},
         };
+
     }
+
+    // handleNome = async () => {
+    //     const nomeb = await AsyncStorage.getItem('nomeb')
+    //     return nomeb;
+    // }
 
     setTestState = (testInfo, status) => {
         this.setState({ tests: { ...this.state.tests, [testInfo.title]: status } });
@@ -91,6 +97,7 @@ class Cozinha extends Component {
             }
             this.setTestState(testInfo, 'playing');
 
+            
             testInfo.onPrepared && testInfo.onPrepared(this.sound);
 
             this.sound.play(() => {

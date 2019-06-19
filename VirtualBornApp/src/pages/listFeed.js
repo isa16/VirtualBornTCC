@@ -18,7 +18,7 @@ export default class ListFeed extends Component {
 
     handleFeedback = async () => {
         const token = await AsyncStorage.getItem('token')
-        fetch("http://172.23.149.134:3001/auth/mostrarFeedback", {
+        fetch("http://192.168.1.6:3001/auth/mostrarFeedback", {
             method: "POST",
             body:
                 JSON.stringify({
@@ -30,9 +30,9 @@ export default class ListFeed extends Component {
             }
         })
             .then(response => response.json())
-            .then(data => {console.log(data) })
+            .then(data => { this.setState({ feedback: data.feedback }) })
             .catch(err => { console.warn(err) })
-
+        this.handleNextPage()
     }
 
 
@@ -41,26 +41,26 @@ export default class ListFeed extends Component {
             <ImageBackground source={require('../app/imagens/fundo.jpg')}
                 style={styles.container}>
                 <View style={styles.inner}>
-                    <TextInput style={styles.input}
-                        underlineColorAndroid='transparent'
-                        placeholder='Nome completo do Professor'
-                        onChangeText={(nome) => this.setState({ nome })}
-                        value={this.state.nome} >
+                    <Text style={styles.titulo1}>VirtualBorn</Text>
+                    <View style={styles.bloco}>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid='transparent'
+                            placeholder='Nome completo do Professor'
+                            onChangeText={(nome) => this.setState({ nome })}
+                            value={this.state.nome} >
 
-                    </TextInput>
-                    <TouchableOpacity style={styles.button}
-                        onPress={() => {
-                            this.handleFeedback()
+                        </TextInput>
+                        <TouchableOpacity style={styles.button}
+                            onPress={() => { this.handleFeedback() }}>
+                            <Text style={styles.buttonText}>Buscar</Text>
 
-                        }}>
-                        <Text style={styles.buttonText1}>Buscar</Text>
-
-                    </TouchableOpacity>
-
-                    <Text>
-                        {this.state.feedback}
-                    </Text>
-
+                        </TouchableOpacity>
+                        <View style={styles.blocoFeed}>
+                            <Text style={styles.feed}>
+                              {"Feedback: " + this.state.feedback}
+                            </Text>
+                        </View>
+                    </View>
 
                 </View>
             </ImageBackground>
@@ -85,29 +85,33 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    bloco: {
+        marginTop: 40,
+        alignItems: 'center',
+    },
     inner: {
         height: 600,
         width: 350,
         backgroundColor: '#EDC271',
         borderRadius: 15,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    list: {
-        padding: 20,
-        backgroundColor: 'transparent',
-    },
-    Container: {
+    feed: {
+        fontSize: 15,
+        color: "#000",
+        marginTop: 15,
+        lineHeight: 24,
         backgroundColor: 'transparent',
         borderWidth: 1,
+        width: 270,
+        height: 200,
         borderRadius: 30,
-        borderColor: 'rgb(100,149,237)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#B8860B',
         padding: 20,
         marginBottom: 20,
-    },
-    select: {
-        backgroundColor: 'rgb(100,149,237)',
-        color: "#333"
     },
     button: {
         justifyContent: 'center',
@@ -119,9 +123,16 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#B8860B',
     },
+    titulo1: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 45,
+        padding: 10,
+        color: '#B8860B'
+    },
     buttonText: {
-        fontSize: 16,
         color: '#FFF',
+        fontSize: 20,
         fontWeight: 'bold',
     },
 })

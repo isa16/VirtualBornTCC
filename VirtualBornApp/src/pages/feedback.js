@@ -21,7 +21,7 @@ export default class Feedback extends Component {
     handleFeedback = async () => {
         const token = await AsyncStorage.getItem('token')
 
-        fetch("http://172.23.149.134:3001/auth/feedback", {
+        fetch("http://192.168.1.6:3001/auth/feedback", {
             method: "POST",
             body:
                 JSON.stringify({
@@ -47,25 +47,27 @@ export default class Feedback extends Component {
                 style={styles.container}>
                 <View style={styles.inner}>
                     <Text style={styles.titulo1}>VirtualBorn</Text>
-                    <Text style={styles.titulo}>Feedback</Text>
-                    <TextInput style={styles.input}
-                        placeholder="Insira o feedback"
-                        multiline
-                        placeholderTextColor="#363636"
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                        value={this.state.feedback}
-                        onChangeText={text => this.setState({ feedback: text })} />
+                    <View style={styles.bloco}>
+                        <Text style={styles.titulo}>Feedback</Text>
+                        <TextInput style={styles.input}
+                            placeholder="Insira o feedback"
+                            multiline
+                            placeholderTextColor="#363636"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            value={this.state.feedback}
+                            onChangeText={text => this.setState({ feedback: text })} />
 
-                    <TouchableOpacity style={styles.botao}
+                        <TouchableOpacity style={styles.botao}
 
-                        onPress={() => {
-                            this.handleFeedback()
+                            onPress={() => {
+                                this.handleFeedback()
 
-                        }}>
-                        <Text style={styles.buttonText}>Enviar</Text>
+                            }}>
+                            <Text style={styles.buttonText}>Enviar</Text>
 
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ImageBackground>
         )
@@ -84,20 +86,24 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     titulo1: {
-        padding: 20,
-        fontSize: 30,
-        color: '#FFF',
-        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 45,
+        marginTop: 15,
+        padding: 10,
+        color: '#B8860B'
     },
-
+    bloco: {
+        marginTop: 50,
+        alignItems: 'center',
+    },
     inner: {
         height: 600,
         width: 350,
         backgroundColor: '#EDC271',
         borderRadius: 15,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-
     },
     botao: {
         justifyContent: 'center',
@@ -110,18 +116,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#B8860B',
     },
     buttonText: {
-        color: '#fff',
-        fontSize: 16,
+        color: '#FFF',
+        fontSize: 20,  
+        fontWeight: 'bold',
     },
     input: {
-        width: 200,
-        height: 280,
-        marginTop: 20,
-        margin: 5,
-        padding: 20,
-        backgroundColor: '#F9E0B8',
-        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-    },
+        width: 280,
+        height: 200,
+        borderColor: 'gray',
+        borderRadius: 30,
+        backgroundColor: '#F9E0B8',
+        marginTop: 30,
+        margin: 30,
+        marginBottom: 10,
+        padding: 5
+    }
 })
