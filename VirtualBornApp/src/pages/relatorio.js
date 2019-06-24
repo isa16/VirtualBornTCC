@@ -25,7 +25,7 @@ export default class Relatorio extends Component {
 
     handleRelatorio = async () => {
         const token = await AsyncStorage.getItem('token')
-        fetch("http://192.168.1.6:3001/auth/relatorio", {
+        fetch("http://192.168.42.46:3001/auth/relatorio", {
             method: "POST",
             body:
                 JSON.stringify({

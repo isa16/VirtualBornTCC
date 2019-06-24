@@ -58,7 +58,8 @@ export default class Main extends Component {
                             email={this.state.email}
                             onChangeText={text => this.setState({ email: text })} />
 
-                        <TextInput style={styles.input}
+                        <TextInput secureTextEntry={true}
+                            style={styles.input}
                             underlineColorAndroid='#F9E0B8'
                             placeholderTextColor="#363636"
                             placeholder="Senha"
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#FFF',
-        fontSize: 20,  
-        fontWeight: 'bold',     
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     buttonText1: {
         marginTop: 20,

@@ -21,7 +21,7 @@ export default class Feedback extends Component {
     handleFeedback = async () => {
         const token = await AsyncStorage.getItem('token')
 
-        fetch("http://192.168.1.6:3001/auth/feedback", {
+        fetch("http://192.168.42.46:3001/auth/feedback", {
             method: "POST",
             body:
                 JSON.stringify({
